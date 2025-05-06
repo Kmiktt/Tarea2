@@ -34,8 +34,9 @@ public class Empleado implements Invitable{
     public void setNombre(String x){
         nombre=x;
     }
-
-    public void Invitar(){
+    
+    @Override
+    public void invitar(){
 
     }
 }
