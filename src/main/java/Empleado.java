@@ -1,5 +1,5 @@
 //falta por agregar implements invitable
-public class Empleado {
+public class Empleado implements Invitable{
     private String id;
     private String apellidos;
     private String nombre;
@@ -35,4 +35,7 @@ public class Empleado {
         nombre=x;
     }
 
+    public void Invitar(){
+
+    }
 }
