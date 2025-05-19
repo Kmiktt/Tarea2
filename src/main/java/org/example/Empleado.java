@@ -1,5 +1,6 @@
-//falta por agregar implements invitable
-public class Empleado implements Invitable{
+package org.example;
+
+public class Empleado implements Invitable {
     private String id;
     private String apellidos;
     private String nombre;
@@ -34,7 +35,7 @@ public class Empleado implements Invitable{
     public void setNombre(String x){
         nombre=x;
     }
-    
+
     @Override
     public void invitar(){
 
