@@ -1,13 +1,23 @@
 package org.example;
 
-public class Departamento implements Invitable {
-    private String nomnbre;
-    public Departamento(){}
-    public int ObtenerCantidadEmpleados(){
-        return 0;
-    }
-    @Override
-    public void invitar() {
+import java.util.ArrayList;
 
+public class Departamento implements Invitable{
+    private String nombre;
+    private ArrayList<Empleado> empleados;
+    public Departamento(String x){
+        nombre=x;
+        empleados=new ArrayList<Empleado>();
+    }
+    public void agregarEmpleado(Empleado em){
+        empleados.add(em);
+    }
+    public int obtenerCantidadEmpleados(){
+        return empleados.size();
+    }
+    public void invitar(Invitacion inv){
+        for (int i = 0; i < empleados.size(); i++) {
+            empleados.get(i).invitar(inv);
+        }
     }
 }
