@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 
-public class Departamento {
+public class Departamento implements Invitable{
     private String nombre;
     private ArrayList<Empleado> empleados;
     public Departamento(String x){
@@ -15,5 +15,9 @@ public class Departamento {
     public int obtenerCantidadEmpleados(){
         return empleados.size();
     }
-
+    public void invitar(Invitacion inv){
+        for (int i = 0; i < empleados.size(); i++) {
+            empleados.get(i).invitar(inv);
+        }
+    }
 }
