@@ -1,6 +1,9 @@
 package org.example;
 
+import java.lang.reflect.Array;
+import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 
 public class Empleado implements Invitable {
     private String id;
@@ -36,6 +39,22 @@ public class Empleado implements Invitable {
 
     public void setNombre(String x){
         nombre=x;
+    }
+
+    public void organizarReunionV(String date, int durationMins, String enl){
+        Reunion rplace = new ReunionVirtual(date, durationMins, enl);
+    }
+    public void organizarReunionP(String date, int durationMins, String sal){
+        Reunion rplace = new ReunionPresencial(date, durationMins, sal);
+        rplace.setOrganizador(this);
+    }
+    public void participarReunion(Reunion r){
+        Instant horadeIngreso = Instant.now();
+        if (horadeIngreso.compareTo(r.getHoraPrevista())<=0){
+            r.addAsistencia(this);
+        } else {
+            r.addRetraso(this, horadeIngreso);
+        }
     }
 
     @Override
