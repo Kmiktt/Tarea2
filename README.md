@@ -1,2 +1,8 @@
-# Tarea2
-Tarea 2 para curso de DOO
+# Estudiantes:
+
+
+Camila Alejandra Garcia Torres (Kmiktt)
+
+Benjamin Alejandro Stuckrath Bustamante (Stuckrath)
+
+Fernanda Catalina Rubilar Sánchez (Catalinafer2023)

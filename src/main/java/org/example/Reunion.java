@@ -35,16 +35,20 @@ public abstract class Reunion {
     public int obtenerTotalAsistencia(){
         return 2;
     }
+
     public void iniciar(){
         horaInicio = Instant.now();
     }
+
     public void finalizar(){
         horaFin = Instant.now();
     }
+
     public float calcularTiempoReal(){
         Duration d = Duration.between(horaInicio,horaFin);
         return ((float) d.toMillis() /1000 / 60);
     }
+    
     public Reunion(String date, int durationMins){
         String pattern = "kk:mm d/M/yyyy";
         DateTimeFormatter DTF = DateTimeFormatter.ofPattern(pattern);
@@ -87,7 +91,15 @@ public abstract class Reunion {
                 System.out.println("File already exists.");
             }
             FileWriter fl = new FileWriter(fileName);
-            fl.write("Test 1");
+            fl.write("Test 1 \n fecha de la reunion:" + getFecha()
+                    + "\n hora de la reunion" + getHoraPrevista()
+                    + "\n hora de inicio: ###"
+                    + "\n hora de finalizacion ###"
+                    + "\n duraciont total:" + calcularTiempoReal()
+                    + "\n tipo de reunión: " + tipoReunion.MARKETING
+                    + "\n enlace o sala: ###"
+                    + "\n participantes: ###"
+                    + "\n notas:");
             fl.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
