@@ -1,7 +1,6 @@
 package org.example;
 
 import java.io.FileWriter;
-import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.*;
@@ -19,6 +18,7 @@ public abstract class Reunion {
     private Empleado organizador;
     private ArrayList asistencias;
     private ArrayList retrasos;
+    private ArrayList<Nota> notas;
 
     public List obtenerAsistencias(){
         ArrayList al = new ArrayList<>();
@@ -58,6 +58,7 @@ public abstract class Reunion {
         duracionPrevista = Duration.of(durationMins, ChronoUnit.MINUTES);
         asistencias = new ArrayList<Asistencia>();
         retrasos = new ArrayList<Asistencia>();
+        notas = new ArrayList<Nota>();
     }
 
     public Date getFecha() {
@@ -79,6 +80,10 @@ public abstract class Reunion {
         Asistencia aplace = new Retraso(e,h);
         retrasos.add(aplace);
     }
+    public void addNotas(String x){
+        Nota n = new Nota(x);
+        notas.add(n);
+    }
 
     public void crearInforme(){
         try {
@@ -96,10 +101,14 @@ public abstract class Reunion {
                     + "\n hora de inicio: ###"
                     + "\n hora de finalizacion ###"
                     + "\n duraciont total:" + calcularTiempoReal()
-                    + "\n tipo de reunión: " + tipoReunion.MARKETING
+                    + "\n tipo de reunión: " + tipoReunion.MARKETING //placeholder (depende de reunion)
                     + "\n enlace o sala: ###"
                     + "\n participantes: ###"
-                    + "\n notas:");
+                    + "\n notas: ");
+            for(int i = 0; i < notas.size(); i++){
+                Nota n = notas.get(i);
+                fl.write(n.getNota() + "\n");
+            }
             fl.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
