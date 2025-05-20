@@ -8,13 +8,14 @@ import java.util.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Reunion {
+public abstract class Reunion {
     private Date fecha;
     private Instant horaPrevista;
     private Duration duracionPrevista;
     private Instant horaInicio;
     private Instant horaFin;
     protected Invitacion invitacion;
+    private Empleado organizador;
 
     public List obtenerAsistencias(){
         ArrayList al = new ArrayList<>();
@@ -56,6 +57,10 @@ public class Reunion {
 
     public Instant getHoraPrevista() {
         return horaPrevista;
+    }
+
+    public void setOrganizador(Empleado organizador) {
+        this.organizador = organizador;
     }
 
     public void crearInforme(){

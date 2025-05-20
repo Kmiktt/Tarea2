@@ -12,4 +12,15 @@ public class Invitacion {
         invitados = new ArrayList<Invitable>();
         formaDeUnirse = fDU;
     }
+    public void addInvitado(Invitable p){
+        invitados.add(p);
+    }
+
+    public String getFDUnirse() {
+        return formaDeUnirse;
+    }
+
+    public Instant getHora() {
+        return hora;
+    }
 }

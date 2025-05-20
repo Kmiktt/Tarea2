@@ -1,15 +1,17 @@
 package org.example;
 
+import java.time.ZoneOffset;
+
 public class Empleado implements Invitable {
     private String id;
     private String apellidos;
     private String nombre;
     private String correo;
 
-    public Empleado(String x, String y, String z, String c){
-        id=x;
-        apellidos=y;
-        nombre=z;
+    public Empleado(String i, String apel, String nomb, String c){
+        id=i;
+        apellidos=apel;
+        nombre=nomb;
         correo=c;
     }
     public String getId(){
@@ -37,7 +39,8 @@ public class Empleado implements Invitable {
     }
 
     @Override
-    public void invitar(){
-
+    public void invitar(Invitacion inv){
+        inv.addInvitado(this);
+        System.out.printf("%s %s (ID: %s) ha sido invitado a una reunion en %s (%tc)\n",nombre, apellidos, id, inv.getFDUnirse(), inv.getHora().atZone(ZoneOffset.UTC));
     }
 }
