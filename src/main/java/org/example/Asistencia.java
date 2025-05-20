@@ -1,13 +1,22 @@
 package org.example;
 
 import java.time.Instant;
-import java.util.ArrayList;
 
 public class Asistencia {
-    public Asistencia(){}
+    private Empleado e;
+    public Asistencia(Empleado emp){
+        e = emp;
+    }
+    public Empleado getE() {
+        return e;
+    }
 }
 
-class Retraso{
+class Retraso extends Asistencia {
     private Instant hora;
-    public Retraso(){}
+    public Retraso(Empleado emp, Instant h){
+        super(emp);
+        hora = h;
+    }
 }
+

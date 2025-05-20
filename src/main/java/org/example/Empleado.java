@@ -1,15 +1,20 @@
 package org.example;
 
+import java.lang.reflect.Array;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+
 public class Empleado implements Invitable {
     private String id;
     private String apellidos;
     private String nombre;
     private String correo;
 
-    public Empleado(String x, String y, String z, String c){
-        id=x;
-        apellidos=y;
-        nombre=z;
+    public Empleado(String i, String apel, String nomb, String c){
+        id=i;
+        apellidos=apel;
+        nombre=nomb;
         correo=c;
     }
     public String getId(){
@@ -36,8 +41,25 @@ public class Empleado implements Invitable {
         nombre=x;
     }
 
+    public void organizarReunionV(String date, int durationMins, String enl){
+        Reunion rplace = new ReunionVirtual(date, durationMins, enl);
+    }
+    public void organizarReunionP(String date, int durationMins, String sal){
+        Reunion rplace = new ReunionPresencial(date, durationMins, sal);
+        rplace.setOrganizador(this);
+    }
+    public void participarReunion(Reunion r){
+        Instant horadeIngreso = Instant.now();
+        if (horadeIngreso.compareTo(r.getHoraPrevista())<=0){
+            r.addAsistencia(this);
+        } else {
+            r.addRetraso(this, horadeIngreso);
+        }
+    }
+
     @Override
     public void invitar(Invitacion inv){
-
+        inv.addInvitado(this);
+        System.out.printf("%s %s (ID: %s) ha sido invitado a una reunion en %s (%tc)\n",nombre, apellidos, id, inv.getFDUnirse(), inv.getHora().atZone(ZoneOffset.UTC));
     }
 }

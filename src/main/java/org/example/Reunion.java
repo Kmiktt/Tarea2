@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.FileWriter;
+import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.*;
@@ -8,13 +9,16 @@ import java.util.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Reunion {
+public abstract class Reunion {
     private Date fecha;
     private Instant horaPrevista;
     private Duration duracionPrevista;
     private Instant horaInicio;
     private Instant horaFin;
     protected Invitacion invitacion;
+    private Empleado organizador;
+    private ArrayList asistencias;
+    private ArrayList retrasos;
 
     public List obtenerAsistencias(){
         ArrayList al = new ArrayList<>();
@@ -52,6 +56,8 @@ public class Reunion {
         fecha = new Date(LDT.getYear()-1900,LDT.getMonthValue()-1,LDT.getDayOfMonth());
         horaPrevista = LDT.toInstant(ZoneOffset.UTC);
         duracionPrevista = Duration.of(durationMins, ChronoUnit.MINUTES);
+        asistencias = new ArrayList<Asistencia>();
+        retrasos = new ArrayList<Asistencia>();
     }
 
     public Date getFecha() {
@@ -60,6 +66,18 @@ public class Reunion {
 
     public Instant getHoraPrevista() {
         return horaPrevista;
+    }
+
+    public void setOrganizador(Empleado organizador) {
+        this.organizador = organizador;
+    }
+    public void addAsistencia(Empleado e){
+        Asistencia aplace = new Asistencia(e);
+        asistencias.add(aplace);
+    }
+    public void addRetraso(Empleado e, Instant h){
+        Asistencia aplace = new Retraso(e,h);
+        retrasos.add(aplace);
     }
 
     public void crearInforme(){
@@ -95,7 +113,7 @@ class ReunionVirtual extends Reunion{
     public ReunionVirtual(String date, int durationMins, String enl){
         super(date,durationMins);
         enlace = enl;
-        invitacion = new Invitacion(super.getHoraPrevista(), enlace);
+        invitacion = new Invitacion(super.getHoraPrevista(), enlace,this);
     }
 }
 class ReunionPresencial extends Reunion{
@@ -103,6 +121,6 @@ class ReunionPresencial extends Reunion{
     public ReunionPresencial(String date, int durationMins, String sal){
         super(date,durationMins);
         sala = sal;
-        invitacion = new Invitacion(super.getHoraPrevista(), sala);
+        invitacion = new Invitacion(super.getHoraPrevista(), sala,this);
     }
 }
