@@ -19,6 +19,7 @@ public abstract class Reunion {
     private ArrayList asistencias;
     private ArrayList retrasos;
     private ArrayList<Nota> notas;
+    private String ReuTip;
 
     public List obtenerAsistencias(){
         ArrayList al = new ArrayList<>();
@@ -49,7 +50,7 @@ public abstract class Reunion {
         return ((float) d.toMillis() /1000 / 60);
     }
     
-    public Reunion(String date, int durationMins){
+    public Reunion(String date, int durationMins, int tipo){
         String pattern = "kk:mm d/M/yyyy";
         DateTimeFormatter DTF = DateTimeFormatter.ofPattern(pattern);
         LocalDateTime LDT = LocalDateTime.parse(date, DTF);
@@ -59,6 +60,17 @@ public abstract class Reunion {
         asistencias = new ArrayList<Asistencia>();
         retrasos = new ArrayList<Asistencia>();
         notas = new ArrayList<Nota>();
+        switch(tipo){
+            case 1:{
+                ReuTip = tipoReunion.TECNICA.getTipo();
+            }
+            case 2:{
+                ReuTip = tipoReunion.MARKETING.getTipo();
+            }
+            default:{
+                ReuTip = tipoReunion.OTRO.getTipo();
+            }
+        }
     }
 
     public Date getFecha() {
@@ -96,12 +108,12 @@ public abstract class Reunion {
                 System.out.println("File already exists.");
             }
             FileWriter fl = new FileWriter(fileName);
-            fl.write("Test 1 \n fecha de la reunion:" + getFecha()
+            fl.write("Test 1: \n fecha de la reunion:" + getFecha()
                     + "\n hora de la reunion" + getHoraPrevista()
                     + "\n hora de inicio: ###"
                     + "\n hora de finalizacion ###"
                     + "\n duraciont total:" + calcularTiempoReal()
-                    + "\n tipo de reunión: " + tipoReunion.MARKETING //placeholder (depende de reunion)
+                    + "\n tipo de reunión: " + ReuTip
                     + "\n enlace o sala: ###"
                     + "\n participantes: ###"
                     + "\n notas: ");
@@ -119,16 +131,16 @@ public abstract class Reunion {
 
 class ReunionVirtual extends Reunion{
     private String enlace;
-    public ReunionVirtual(String date, int durationMins, String enl){
-        super(date,durationMins);
+    public ReunionVirtual(String date, int durationMins, String enl, int tipo){
+        super(date,durationMins,tipo);
         enlace = enl;
         invitacion = new Invitacion(super.getHoraPrevista(), enlace,this);
     }
 }
 class ReunionPresencial extends Reunion{
     private String sala;
-    public ReunionPresencial(String date, int durationMins, String sal){
-        super(date,durationMins);
+    public ReunionPresencial(String date, int durationMins, String sal, int tipo){
+        super(date,durationMins,tipo);
         sala = sal;
         invitacion = new Invitacion(super.getHoraPrevista(), sala,this);
     }
