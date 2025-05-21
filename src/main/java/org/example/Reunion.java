@@ -127,6 +127,13 @@ public abstract class Reunion {
             e.printStackTrace();
         }
     }
+    @Override
+    public String toString() {
+        return "Reunion: esta clase abstracta es el plano inicial de una reunion" +
+                "cuya variante no se especifica todavía, dentro tiene las " +
+                "instrucciones para hacer el informe final de la reunion" +
+                "(nota: placeholder, editar si es necesario)";
+    }
 }
 
 class ReunionVirtual extends Reunion{
@@ -136,6 +143,12 @@ class ReunionVirtual extends Reunion{
         enlace = enl;
         invitacion = new Invitacion(super.getHoraPrevista(), enlace,this);
     }
+    @Override
+    public String toString() {
+        return "ReunionVirtual: esta clase es una variante de la clase reunion" +
+                "donde se añade la variable enlace en referencia a una " +
+                "reunion virtual (nota: placeholder, editar si es necesario)";
+    }
 }
 class ReunionPresencial extends Reunion{
     private String sala;
@@ -143,5 +156,11 @@ class ReunionPresencial extends Reunion{
         super(date,durationMins,tipo);
         sala = sal;
         invitacion = new Invitacion(super.getHoraPrevista(), sala,this);
+    }
+    @Override
+    public String toString() {
+        return "ReunionPresencial: una variante de Reunion donde se añade" +
+                "la variable sala en referencia a la sala designada para" +
+                "la reunion presencial (nota: placeholder, editar si es necesario)";
     }
 }

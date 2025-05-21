@@ -62,4 +62,8 @@ public class Empleado implements Invitable {
         inv.addInvitado(this);
         System.out.printf("%s %s (ID: %s) ha sido invitado a una reunion en %s (%tc)\n",nombre, apellidos, id, inv.getFDUnirse(), inv.getHora().atZone(ZoneOffset.UTC));
     }
+    @Override
+    public String toString() {
+        return "Empleado: (nota: placeholder, editar si es necesario)";
+    }
 }

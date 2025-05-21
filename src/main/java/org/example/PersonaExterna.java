@@ -25,4 +25,8 @@ public class PersonaExterna implements Invitable {
     }
     public void invitar(Invitacion inv){
     }
+    @Override
+    public String toString() {
+        return "PersonaExterna: (nota: placeholder, editar si es necesario)";
+    }
 }

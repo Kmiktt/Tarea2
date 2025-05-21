@@ -29,4 +29,8 @@ public class Invitacion {
     public Instant getHora() {
         return hora;
     }
+    @Override
+    public String toString() {
+        return "Invitacion: (nota: placeholder, editar si es necesario)";
+    }
 }
