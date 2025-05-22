@@ -41,12 +41,15 @@ public class Empleado implements Invitable {
         nombre=x;
     }
 
-    public void organizarReunionV(String date, int durationMins, String enl, int tipo){
-        Reunion rplace = new ReunionVirtual(date, durationMins, enl,tipo);
-    }
-    public void organizarReunionP(String date, int durationMins, String sal, int tipo){
-        Reunion rplace = new ReunionPresencial(date, durationMins, sal, tipo);
+    public Reunion organizarReunionV(String date, int durationMins, String enl){
+        Reunion rplace = new ReunionVirtual(date, durationMins, enl);
         rplace.setOrganizador(this);
+        return rplace;
+    }
+    public Reunion organizarReunionP(String date, int durationMins, String sal){
+        Reunion rplace = new ReunionPresencial(date, durationMins, sal);
+        rplace.setOrganizador(this);
+        return rplace;
     }
     public void participarReunion(Reunion r){
         Instant horadeIngreso = Instant.now();
