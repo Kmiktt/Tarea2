@@ -16,8 +16,8 @@ public abstract class Reunion {
     private Instant horaFin;
     protected Invitacion invitacion;
     private Empleado organizador;
-    private ArrayList asistencias;
-    private ArrayList retrasos;
+    private ArrayList<Asistencia> asistencias;
+    private ArrayList<Asistencia> retrasos;
     private ArrayList<Nota> notas;
     private String ReuTip;
 
