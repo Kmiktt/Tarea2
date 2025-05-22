@@ -63,9 +63,11 @@ public abstract class Reunion {
         switch(tipo){
             case 1:{
                 ReuTip = tipoReunion.TECNICA.getTipo();
+                break;
             }
             case 2:{
                 ReuTip = tipoReunion.MARKETING.getTipo();
+                break;
             }
             default:{
                 ReuTip = tipoReunion.OTRO.getTipo();
