@@ -25,7 +25,7 @@ public class EmpleadoTest extends TestCase {
     @Test
     @DisplayName("Verificar si la invitacion se guardo correctamente")
     public void testInvitar() {
-        reunion=EmPrueba1.organizarReunionP("10:10 20/05/2025",10,"Sala A");
+        reunion=EmPrueba1.organizarReunionP("10:10 20/05/2025",10,"Sala A",1);
         EmPrueba2.invitar(reunion.invitacion);
         assertEquals("Sala A",reunion.invitacion.getFDUnirse());
         assertEquals(reunion,reunion.invitacion.getReunionCorrespondiente());

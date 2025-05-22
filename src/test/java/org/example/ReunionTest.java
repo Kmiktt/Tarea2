@@ -11,8 +11,8 @@ public class ReunionTest extends TestCase {
     Reunion reV;
     @BeforeEach
     public void setUp(){
-        reP=new ReunionPresencial("10:10 20/05/2025",10,"Sala A");
-        reV=new ReunionVirtual("10:10 20/05/2025",10,"A.cl");
+        reP=new ReunionPresencial("10:10 20/05/2025",10,"Sala A",1);
+        reV=new ReunionVirtual("10:10 20/05/2025",10,"A.cl",1);
     }
     @AfterEach
     public void tearDown(){
