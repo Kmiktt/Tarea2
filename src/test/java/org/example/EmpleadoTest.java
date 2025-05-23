@@ -35,10 +35,9 @@ public class EmpleadoTest extends TestCase {
     public void NullInvitacion() {
         try {
             EmPrueba2.invitar(null);
-            System.out.println("se esperaba excepcion");
+            fail("se esperaba excepcion");
         }
         catch(NoHayInvitacionException e){
-
         }
 
     }
