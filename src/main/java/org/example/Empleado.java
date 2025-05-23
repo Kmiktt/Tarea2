@@ -40,7 +40,6 @@ public class Empleado implements Invitable {
     public void setNombre(String x){
         nombre=x;
     }
-
     public Reunion organizarReunionV(String date, int durationMins, String enl,int tipo){
         Reunion rplace = new ReunionVirtual(date, durationMins, enl,tipo);
         rplace.setOrganizador(this);
@@ -61,7 +60,10 @@ public class Empleado implements Invitable {
     }
 
     @Override
-    public void invitar(Invitacion inv){
+    public void invitar(Invitacion inv) throws NoHayInvitacionException{
+        if (inv==null){
+            throw new NoHayInvitacionException();
+        }
         inv.addInvitado(this);
         System.out.printf("%s %s (ID: %s) ha sido invitado a una reunion en %s (%tc)\n",nombre, apellidos, id, inv.getFDUnirse(), inv.getHora().atZone(ZoneOffset.UTC));
     }

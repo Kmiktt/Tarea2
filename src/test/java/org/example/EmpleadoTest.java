@@ -33,6 +33,13 @@ public class EmpleadoTest extends TestCase {
     @Test
     @DisplayName("Verificar caso extremo de invitar a una reunion nula")
     public void NullInvitacion() {
-        EmPrueba2.invitar(null);
+        try {
+            EmPrueba2.invitar(null);
+            System.out.println("se esperaba excepcion");
+        }
+        catch(NoHayInvitacionException e){
+
+        }
+
     }
 }
