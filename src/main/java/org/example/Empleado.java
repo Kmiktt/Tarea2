@@ -69,6 +69,6 @@ public class Empleado implements Invitable {
     }
     @Override
     public String toString() {
-        return "Empleado: (nota: placeholder, editar si es necesario)";
+        return (nombre+apellidos);
     }
 }
