@@ -37,4 +37,8 @@ public class Invitacion {
         }
         return x;
     }
+
+    public ArrayList getInvitados() {
+        return invitados;
+    }
 }
