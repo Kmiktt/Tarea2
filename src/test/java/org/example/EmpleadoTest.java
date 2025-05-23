@@ -1,11 +1,11 @@
 package org.example;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import junit.framework.TestCase;
-
 
 public class EmpleadoTest extends TestCase {
     private Empleado EmPrueba1;
@@ -30,6 +30,17 @@ public class EmpleadoTest extends TestCase {
         assertEquals("Sala A",reunion.invitacion.getFDUnirse());
         assertEquals(reunion,reunion.invitacion.getReunionCorrespondiente());
     }
+
+    @Test
+    @DisplayName("Verificar Unirse")
+    public void testUnirse() {
+        Invitable test=((Invitable) EmPrueba2);
+        reunion=EmPrueba1.organizarReunionP("10:10 20/05/2026",10,"Sala A",1);
+        EmPrueba2.invitar(reunion.invitacion);
+        EmPrueba2.unirseAReunion(reunion);
+        assertEquals((reunion.obtenerAsistencias()).getFirst().toString(),test.toString());
+    }
+
     @Test
     @DisplayName("Verificar caso extremo de invitar a una reunion nula")
     public void NullInvitacion() {
@@ -39,6 +50,5 @@ public class EmpleadoTest extends TestCase {
         }
         catch(NoHayInvitacionException e){
         }
-
     }
 }
