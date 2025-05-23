@@ -99,6 +99,6 @@ public class Empleado implements Invitable {
     }
     @Override
     public String toString() {
-        return (nombre+apellidos);
+        return (nombre+" "+apellidos);
     }
 }
