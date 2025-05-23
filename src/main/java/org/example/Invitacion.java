@@ -31,6 +31,10 @@ public class Invitacion {
     }
     @Override
     public String toString() {
-        return "Invitacion: (nota: placeholder, editar si es necesario)";
+        String x="";
+        for (int i = 0; i < invitados.size(); i++) {
+            x=x+invitados.get(i).toString()+"\n";
+        }
+        return x;
     }
 }

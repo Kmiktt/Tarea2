@@ -12,7 +12,7 @@ public class Asistencia {
     }
     @Override
     public String toString() {
-        return "Asistencia: (nota: placeholder, editar si es necesario)";
+        return e.toString();
     }
 }
 
@@ -21,10 +21,6 @@ class Retraso extends Asistencia {
     public Retraso(Empleado emp, Instant h){
         super(emp);
         hora = h;
-    }
-    @Override
-    public String toString() {
-        return "Retraso: (nota: placeholder, editar si es necesario)";
     }
 }
 

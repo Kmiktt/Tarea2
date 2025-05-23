@@ -22,8 +22,10 @@ public class Departamento implements Invitable{
     }
     @Override
     public String toString() {
-        return "Departamento: contiene arrays de distintos empleados y tiene la " +
-                "habilidad de añadirlos segun se requiera " +
-                "(nota: placeholder, editar si es necesario)";
+        String x="";
+        for (int i = 0; i < empleados.size(); i++) {
+            x=x+empleados.get(i).toString()+"\n";
+        }
+        return x;
     }
 }

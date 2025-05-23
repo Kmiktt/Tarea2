@@ -10,7 +10,6 @@ public class Nota {
     }
     @Override
     public String toString() {
-        return "Nota: sirve para añadir notas y comentarios a las reuniones" +
-                "(nota: placeholder, editar si es necesario)";
+        return contenido;
     }
 }
