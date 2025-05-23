@@ -20,21 +20,25 @@ public abstract class Reunion {
     private ArrayList<Asistencia> retrasos;
     private ArrayList<Nota> notas;
     private String ReuTip;
+    protected String fDUnirse;
 
     public List obtenerAsistencias(){
-        ArrayList al = new ArrayList<>();
-        return al;
+        return asistencias;
     }
     public List obtenerAusencias(){
         ArrayList al = new ArrayList<>();
+        for (Object i : invitacion.getInvitados()){
+            if (!asistencias.contains(i)&&!retrasos.contains(i)){
+                al.add(i);
+            }
+        }
         return al;
     }
     public List obtenerRetrasos(){
-        ArrayList al = new ArrayList<>();
-        return al;
+        return retrasos;
     }
     public int obtenerTotalAsistencia(){
-        return 2;
+        return asistencias.size()+retrasos.size();
     }
 
     public void iniciar(){
@@ -49,7 +53,12 @@ public abstract class Reunion {
         Duration d = Duration.between(horaInicio,horaFin);
         return ((float) d.toMillis() /1000 / 60);
     }
-    
+    /**Constructor de Reunion, usa la fecha, hora, y duracion entregadas como parametros para
+     * definir sus propios parametros de fecha, hora prevista y duración prevista, ademas de definir
+     * los ArrayLists para Notas y Asistencias
+     * @param date String con forma hh:mm d/M/yyyy que contiene la hora y fecha de la reunión
+     * @param durationMins Int con la cantidad de minutos que durará la reunión
+     * @param tipo Número entre 1 y 3 que señaliza el carácter de la reunión (Tecnica/Marketing/Otro)*/
     public Reunion(String date, int durationMins, int tipo){
         String pattern = "kk:mm d/M/yyyy";
         DateTimeFormatter DTF = DateTimeFormatter.ofPattern(pattern);
@@ -86,11 +95,11 @@ public abstract class Reunion {
     public void setOrganizador(Empleado organizador) {
         this.organizador = organizador;
     }
-    public void addAsistencia(Empleado e){
+    public void addAsistencia(Invitable e){
         Asistencia aplace = new Asistencia(e);
         asistencias.add(aplace);
     }
-    public void addRetraso(Empleado e, Instant h){
+    public void addRetraso(Invitable e, Instant h){
         Asistencia aplace = new Retraso(e,h);
         retrasos.add(aplace);
     }
@@ -101,7 +110,10 @@ public abstract class Reunion {
 
     public void crearInforme(){
         try {
-            String fileName = "Reunion_" + this.toString()+".txt";
+            String fileName = "Reunion_"+fecha.getDate()+"-"+(fecha.getMonth()+1)+"-"+(fecha.getYear()+1990)+"-"+organizador.toString()+".txt";
+            String test = "Lol";
+            System.out.println(fileName);
+            fileName.replaceAll(" ", "_");
             System.out.println(fileName);
             File myObj = new File(fileName);
             if (myObj.createNewFile()) {
@@ -112,13 +124,20 @@ public abstract class Reunion {
             FileWriter fl = new FileWriter(fileName);
             fl.write("Test 1: \n fecha de la reunion:" + getFecha()
                     + "\n hora de la reunion" + getHoraPrevista()
-                    + "\n hora de inicio: ###"
-                    + "\n hora de finalizacion ###"
+                    + "\n hora de inicio: " + horaInicio
+                    + "\n hora de finalizacion: " + horaFin
                     + "\n duraciont total:" + calcularTiempoReal()
                     + "\n tipo de reunión: " + ReuTip
-                    + "\n enlace o sala: ###"
-                    + "\n participantes: ###"
-                    + "\n notas: ");
+                    + "\n enlace o sala: " + fDUnirse
+                    + "\n participantes: \n Puntuales:");
+            for (Asistencia a : asistencias){
+                fl.write("\n " + a.toString());
+            }
+            fl.write("\n Atrasados:");
+            for (Asistencia a : retrasos){
+                fl.write("\n " + a.toString());
+            }
+            fl.write("\n Notas: \n");
             for(int i = 0; i < notas.size(); i++){
                 Nota n = notas.get(i);
                 fl.write(n.getNota() + "\n");
@@ -143,6 +162,7 @@ class ReunionVirtual extends Reunion{
     public ReunionVirtual(String date, int durationMins, String enl, int tipo){
         super(date,durationMins,tipo);
         enlace = enl;
+        fDUnirse = enlace;
         invitacion = new Invitacion(super.getHoraPrevista(), enlace,this);
     }
     @Override
@@ -157,6 +177,7 @@ class ReunionPresencial extends Reunion{
     public ReunionPresencial(String date, int durationMins, String sal, int tipo){
         super(date,durationMins,tipo);
         sala = sal;
+        fDUnirse = sala;
         invitacion = new Invitacion(super.getHoraPrevista(), sala,this);
     }
     @Override

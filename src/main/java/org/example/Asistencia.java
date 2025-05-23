@@ -3,11 +3,11 @@ package org.example;
 import java.time.Instant;
 
 public class Asistencia {
-    private Empleado e;
-    public Asistencia(Empleado emp){
+    protected Invitable e;
+    public Asistencia(Invitable emp){
         e = emp;
     }
-    public Empleado getE() {
+    public Invitable getE() {
         return e;
     }
     @Override
@@ -18,9 +18,13 @@ public class Asistencia {
 
 class Retraso extends Asistencia {
     private Instant hora;
-    public Retraso(Empleado emp, Instant h){
+    public Retraso(Invitable emp, Instant h){
         super(emp);
         hora = h;
+    }
+    @Override
+    public String toString() {
+        return (super.e.toString() + " | Hora de llegada: "+ hora);
     }
 }
 

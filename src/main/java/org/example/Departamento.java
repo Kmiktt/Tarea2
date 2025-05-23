@@ -20,6 +20,11 @@ public class Departamento implements Invitable{
             empleados.get(i).invitar(inv);
         }
     }
+    public void unirseAReunion(Reunion r){
+        for (Empleado e : empleados){
+            e.unirseAReunion(r);
+        }
+    }
     @Override
     public String toString() {
         String x="";
