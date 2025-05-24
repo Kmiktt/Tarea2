@@ -47,11 +47,13 @@ public class Empleado implements Invitable {
     public String getCorreo(){
         return correo;
     }
-    //quiza dejarlo en protected, pero la opcion de cambiar correo y nombre a veces se hace necesaria
+    /**Setter de correo, en caso de que haya un cambio de correo dentro de la compañia
+     * @param x String con el correo final*/
     public void setCorreo(String x){
         correo=x;
     }
-
+    /**Setter de nombre, en caso de que sea necesario
+     * @param x String con el nombre final*/
     public void setNombre(String x){
         nombre=x;
     }

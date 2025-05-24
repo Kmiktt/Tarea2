@@ -17,18 +17,28 @@ public class PersonaExterna implements Invitable {
         nombre=nom;
         correo=cor;
     }
+    /**Getter del Nombre
+     * @return String con Nombre de empleado */
     public String getNombre(){
         return nombre;
     }
+    /**Getter de Apellidos
+     * @return String con Apellidos de empleado */
     public String getApellidos(){
         return apellidos;
     }
+    /**Getter de correo
+     * @return String con el correo del empleado */
     public String getCorreo(){
         return correo;
     }
+    /**Setter de correo, en caso de que haya un cambio de correo dentro de la compañia
+     * @param x String con el correo final*/
     public void setCorreo(String x){
         correo=x;
     }
+    /**Setter de nombre, en caso de que sea necesario
+     * @param x String con el nombre final*/
     public void setNombre(String x){
         nombre=x;
     }
