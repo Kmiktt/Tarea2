@@ -144,39 +144,37 @@ public abstract class Reunion {
 
     public void crearInforme(){
         try {
-            String fileName = "Reunion_"+fecha.getDate()+"-"+(fecha.getMonth()+1)+"-"+(fecha.getYear()+1990)+"-"+organizador.toString()+".txt";
-            String test = "Lol";
-            System.out.println(fileName);
-            fileName.replaceAll(" ", "_");
-            System.out.println(fileName);
+            String fileName = "Reunion_"+horaPrevista+"-"+organizador.toString()+".txt";
+            fileName = fileName.replaceAll(" ", "_");
+            fileName = fileName.replaceAll(":", "-");
             File myObj = new File(fileName);
             if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
+                System.out.println("Informe creado: " + myObj.getName());
+                FileWriter fl = new FileWriter(fileName);
+                fl.write("Test 1: \n Fecha de la reunion:" + getFecha()
+                        + "\n Hora de la reunion" + getHoraPrevista()
+                        + "\n Hora de inicio: " + horaInicio
+                        + "\n Hora de finalizacion: " + horaFin
+                        + "\n Duración total (en minutos):" + calcularTiempoReal()
+                        + "\n Tipo de reunión: " + ReuTip
+                        + "\n Enlace o Sala: " + fDUnirse
+                        + "\n Participantes: \n Puntuales:");
+                for (Asistencia a : asistencias){
+                    fl.write("\n " + a.toString());
+                }
+                fl.write("\n Atrasados:");
+                for (Asistencia a : retrasos){
+                    fl.write("\n " + a.toString());
+                }
+                fl.write("\n Notas: \n");
+                for(int i = 0; i < notas.size(); i++){
+                    Nota n = notas.get(i);
+                    fl.write(n.getNota() + "\n");
+                }
+                fl.close();
             } else {
-                System.out.println("File already exists.");
+                System.out.println("Archivo con este nombre ya existe.");
             }
-            FileWriter fl = new FileWriter(fileName);
-            fl.write("Test 1: \n Fecha de la reunion:" + getFecha()
-                    + "\n Hora de la reunion" + getHoraPrevista()
-                    + "\n Hora de inicio: " + horaInicio
-                    + "\n Hora de finalizacion: " + horaFin
-                    + "\n Duración total (en minutos):" + calcularTiempoReal()
-                    + "\n Tipo de reunión: " + ReuTip
-                    + "\n Enlace o Sala: " + fDUnirse
-                    + "\n Participantes: \n Puntuales:");
-            for (Asistencia a : asistencias){
-                fl.write("\n " + a.toString());
-            }
-            fl.write("\n Atrasados:");
-            for (Asistencia a : retrasos){
-                fl.write("\n " + a.toString());
-            }
-            fl.write("\n Notas: \n");
-            for(int i = 0; i < notas.size(); i++){
-                Nota n = notas.get(i);
-                fl.write(n.getNota() + "\n");
-            }
-            fl.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
