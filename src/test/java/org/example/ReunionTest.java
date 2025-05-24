@@ -45,7 +45,9 @@ public class ReunionTest extends TestCase {
     @DisplayName("Prueba de texto guardado")
     public void testArchivo(){
         reP.setOrganizador(Em1);
-        String NameTest = "Reunion_"+reP.getFecha().getDate()+"-"+(reP.getFecha().getMonth()+1)+"-"+(reP.getFecha().getYear()+1990)+"-"+Em1.toString()+".txt";
+        String NameTest = "Reunion_"+reP.getHoraPrevista()+"-"+reP.getOrganizador().toString()+".txt";
+        NameTest = NameTest.replaceAll(" ", "_");
+        NameTest = NameTest.replaceAll(":", "-");
         Em1.invitar(reP.invitacion);
         Em2.invitar(reP.invitacion);
         Em1.unirseAReunion(reP);
@@ -54,10 +56,32 @@ public class ReunionTest extends TestCase {
         reP.finalizar();
         reP.crearInforme();
 
-        NameTest.replaceAll(" ", "_");
-        System.out.println(NameTest);
         File myObj = new File(NameTest);
         assertTrue(myObj.canRead());
+    }
+
+    @Test
+    @DisplayName("Caso extremo de falta de datos para informe")
+    public void testFaltaDatos(){
+        reP.setOrganizador(Em1);
+        String NameTest = "Reunion_"+reP.getHoraPrevista()+"-"+reP.getOrganizador().toString()+".txt";
+        NameTest = NameTest.replaceAll(" ", "_");
+        NameTest = NameTest.replaceAll(":", "-");
+        Em1.invitar(reP.invitacion);
+        Em2.invitar(reP.invitacion);
+        Em1.unirseAReunion(reP);
+        Em2.unirseAReunion(reP);
+        //no hay hora de inicio ni hora de finalizacion
+        try{
+            reP.crearInforme();
+            fail("se esperaba excepcion SinSuficientesDatosException");
+        }
+        catch(SinSuficientesDatosException e){
+
+        }
+
+
 
     }
+
 }

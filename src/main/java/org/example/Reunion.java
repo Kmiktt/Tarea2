@@ -142,12 +142,17 @@ public abstract class Reunion {
         notas.add(n);
     }
 
-    public void crearInforme(){
+    public void crearInforme() throws SinSuficientesDatosException{
         try {
             String fileName = "Reunion_"+horaPrevista+"-"+organizador.toString()+".txt";
             fileName = fileName.replaceAll(" ", "_");
             fileName = fileName.replaceAll(":", "-");
             File myObj = new File(fileName);
+
+            if(horaInicio==null||horaFin==null){
+                throw new SinSuficientesDatosException();
+            }
+
             if (myObj.createNewFile()) {
                 System.out.println("Informe creado: " + myObj.getName());
                 FileWriter fl = new FileWriter(fileName);
